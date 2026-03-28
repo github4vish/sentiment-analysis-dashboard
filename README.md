@@ -1,340 +1,218 @@
-# 📊 Sentiment Analysis Dashboard Project
-
-### (Frontend + API Integration Assignment)
 
 ---
 
-## 🎯 Project Title
-
-**Design and Develop a Sentiment Analysis Intelligence Dashboard**
+# 📊 Sentiment Analysis Dashboard – Simple 6 Steps Guide
 
 ---
 
-## 🧠 Project Objective
+## ✅ Step 1: Understand File Structure (Diagram + Purpose)
 
-You are required to design and develop a **Sentiment Analysis Dashboard** based on a Machine Learning model built using:
+### 📁 Project Structure
 
-* TF-IDF Vectorization
-* Logistic Regression
-* Text Preprocessing using NLTK
-* Model Evaluation (Accuracy & Confusion Matrix)
+```id="w9k3fz"
+sentiment-dashboard/
+│
+├── index.html
+├── css/
+│   └── styles.css
+├── js/
+│   └── dashboard.js
+│
+├── models/
+│       model.pkl
+│
+├── training/
+│       train_model.py
+│       notebook.ipynb
+│
+└── app.py
+```
 
-The system must include:
+### 📌 Purpose of Each File
 
-1. Frontend Dashboard (UI)
-2. Backend API Layer
-3. Integration between Frontend and Backend
+| File/Folder        | Purpose                                              |
+| ------------------ | ---------------------------------------------------- |
+| **index.html**     | Main dashboard UI                                    |
+| **styles.css**     | Styling and responsive design                        |
+| **dashboard.js**   | Handles API calls and UI updates                     |
+| **models/**        | Stores trained ML model                              |
+| **train_model.py** | Converts notebook into trained model                 |
+| **notebook.ipynb** | Used for NLP training (TF-IDF + Logistic Regression) |
+| **app.py**         | Backend API server                                   |
 
 ---
 
-# 📁 Part 1: Given ML Script Overview
+## ✅ Step 2: Design Dashboard (index.html Structure)
 
-The backend model performs:
-
-* Dataset loading (`reviews.csv`)
-* Text preprocessing:
-
-  * Lowercasing
-  * Punctuation removal
-  * Stopword removal
-  * Stemming
-* TF-IDF Feature Extraction
-* Train-Test Split (80/20)
-* Logistic Regression Training
-* Model Evaluation
-* Confusion Matrix Generation
-* Live Sentiment Prediction
-
----
-
-# 🖥️ Part 2: Dashboard Layout Design (Frontend)
-
-You must design a responsive dashboard using:
+Use:
 
 * Bootstrap 5
-* Chart.js (or similar)
-* DataTables (for results table)
-* Fetch API / Axios (for API calls)
+* DC.js
+* Crossfilter2
+* D3.js
+
+### 📊 Dashboard Layout Diagram
+
+```id="h2z8qn"
+----------------------------------------------------------
+📊 Sentiment Analysis Intelligence Dashboard
+----------------------------------------------------------
+Navbar:
+[ Title ] [ Upload ] [ Retrain ] [ Dark Mode ]
+----------------------------------------------------------
+Dataset Overview:
+[ Total Reviews ] [ Positive ] [ Negative ]
+[ Sentiment Distribution Chart ]
+----------------------------------------------------------
+Preprocessing Section:
+[ Text Transformation Flow Display ]
+----------------------------------------------------------
+Feature Engineering:
+[ Top TF-IDF Words Chart ]
+----------------------------------------------------------
+Model Summary:
+[ Algorithm Info + Train/Test Details ]
+----------------------------------------------------------
+Evaluation Section:
+[ Accuracy ] [ Precision ] [ Recall ] [ F1 Score ]
+----------------------------------------------------------
+Confusion Matrix:
+[ 2x2 Heatmap ]
+----------------------------------------------------------
+Prediction Section:
+[ Text Input ] [ Analyze Button ] [ Result Display ]
+----------------------------------------------------------
+Results Table:
+[ Prediction Results with Filters ]
+----------------------------------------------------------
+```
+
+### 🎯 Goal
+
+* Build responsive dashboard using Bootstrap
+* Allocate areas for charts (DC.js)
+* Maintain clean and professional UI
 
 ---
 
-## 📌 Required Dashboard Sections
+## ✅ Step 3: Create Model Training Script
+
+### 📌 Task
+
+Create **train_model.py** using the `.ipynb` file.
+
+### 🎯 Purpose
+
+* Load dataset (reviews data)
+* Perform NLP preprocessing
+* Apply TF-IDF feature extraction
+* Train Logistic Regression model
+* Evaluate performance
 
 ---
 
-## 1️⃣ Navbar
+## ✅ Step 4: Generate and Save Model
 
-Include:
+### 📌 Task
 
-* Dashboard Title: **Sentiment Analysis Intelligence Dashboard**
-* Upload Dataset Button
-* Retrain Model Button
-* Dark Mode Toggle
-* User Dropdown
+Run the training script.
 
----
+### 🎯 Output
 
-## 2️⃣ Dataset Overview Section
+* Save trained model into:
 
-Display:
+```id="m4z7rx"
+/models/model.pkl
+```
 
-* Total Reviews
-* Positive Reviews Count
-* Negative Reviews Count
-* Train/Test Split Ratio
-
-### Chart:
-
-* Doughnut Chart (Sentiment Distribution)
+* This model will be used by backend APIs
 
 ---
 
-## 3️⃣ Text Preprocessing Visualization
+## ✅ Step 5: Create Backend API (app.py)
 
-Display NLP pipeline:
+### 📌 API Design (Names, Routes, Purpose)
 
-Original Text → Lowercase → Remove Punctuation → Remove Stopwords → Stemming
+| API Name              | Route                              | Purpose                    |
+| --------------------- | ---------------------------------- | -------------------------- |
+| Health Check          | `/api/health`                      | Check server status        |
+| Model Info            | `/api/model/info`                  | Model details              |
+| Dataset Upload        | `/api/dataset/upload`              | Upload dataset             |
+| Dataset Summary       | `/api/dataset/summary`             | Dataset stats              |
+| Preprocess            | `/api/preprocess`                  | Perform text preprocessing |
+| Preprocess Example    | `/api/preprocess/example`          | Show NLP steps             |
+| Feature Summary       | `/api/features/summary`            | TF-IDF info                |
+| Top Words             | `/api/features/top-words`          | Important words            |
+| Train Model           | `/api/model/train`                 | Train model                |
+| Model Status          | `/api/model/status`                | Training status            |
+| Metrics               | `/api/model/metrics`               | Accuracy, precision, etc.  |
+| Confusion Matrix      | `/api/model/confusion-matrix`      | Matrix data                |
+| Classification Report | `/api/model/classification-report` | Performance table          |
+| Predict               | `/api/predict`                     | Single prediction          |
+| Bulk Predict          | `/api/predict/bulk`                | Multiple predictions       |
+| Results               | `/api/results`                     | Prediction results         |
+| Download Results      | `/api/results/download`            | Export results             |
 
-Include:
+### 🎯 Goal
 
-* Example transformation
-* Side-by-side comparison
-
----
-
-## 4️⃣ TF-IDF Feature Engineering Section
-
-Display:
-
-* Vocabulary Size
-* Total Features
-* Top 10 Important Words
-
-### Chart:
-
-* Bar chart showing top TF-IDF words
-
----
-
-## 5️⃣ Model Training Summary
-
-Display:
-
-* Algorithm Used: Logistic Regression
-* Train Size
-* Test Size
-* Random State
+* Connect frontend dashboard with ML model
+* Provide structured JSON responses
 
 ---
 
-## 6️⃣ Evaluation Metrics Section
+## ✅ Step 6: Create dashboard.js (Frontend Logic)
 
-Display:
+### 📌 Responsibilities
 
-* Accuracy (Large numeric card)
-* Precision
-* Recall
-* F1 Score
+dashboard.js connects **index.html ↔ app.py**
 
----
+### 🔧 Tasks
 
-## 7️⃣ Confusion Matrix Section
+1. On Page Load
 
-Display a 2x2 matrix:
+   * Fetch dataset summary
+   * Fetch model metrics
+   * Load charts
 
-|                 | Predicted Negative | Predicted Positive |
-| --------------- | ------------------ | ------------------ |
-| Actual Negative | TN                 | FP                 |
-| Actual Positive | FN                 | TP                 |
+2. Prediction Handling
 
-Use color-coded heatmap styling.
+   * Take user input
+   * Send request to prediction API
+   * Display sentiment and confidence
 
----
+3. Display Data
 
-## 8️⃣ Live Sentiment Prediction Section
+   * Update KPI cards
+   * Show preprocessing examples
+   * Update results table
 
-Include:
+4. Chart Rendering
 
-* Textarea input
-* Analyze button
-* Clear button
+   * Sentiment Distribution
+   * TF-IDF Words
+   * Confusion Matrix
 
-Display:
+5. Handle
 
-* Predicted Sentiment
-* Confidence Score
-* Color-coded result (Green = Positive, Red = Negative)
-
-Optional:
-
-* Sentiment Gauge Chart
+   * Loading indicators
+   * Errors
+   * Dynamic updates
 
 ---
 
-## 9️⃣ Prediction Results Table
+## 🎯 Final Flow
 
-Table Columns:
-
-* Review
-* Actual Sentiment
-* Predicted Sentiment
-* Match (✔ / ✘)
-
-Features:
-
-* Pagination
-* Search
-* Filter by sentiment
-* Download CSV option
+```id="a7m9qx"
+User → index.html (Dashboard UI)
+        ↓
+dashboard.js (Frontend Logic)
+        ↓
+app.py (Backend API)
+        ↓
+ML Model (Prediction)
+        ↓
+Response → Dashboard Visualization
+```
 
 ---
 
-# 🌐 Part 3: Backend API Endpoints
-
-You must design REST APIs to support the dashboard.
-
----
-
-## 🔹 System Endpoints
-
-* `GET /api/health`
-* `GET /api/model/info`
-
----
-
-## 🔹 Dataset Endpoints
-
-* `POST /api/dataset/upload`
-* `GET /api/dataset/summary`
-* `GET /api/dataset/sample`
-
----
-
-## 🔹 Preprocessing Endpoints
-
-* `POST /api/preprocess`
-* `GET /api/preprocess/example`
-
----
-
-## 🔹 Feature Engineering Endpoints
-
-* `GET /api/features/summary`
-* `GET /api/features/top-words`
-
----
-
-## 🔹 Model Endpoints
-
-* `POST /api/model/train`
-* `GET /api/model/status`
-
----
-
-## 🔹 Evaluation Endpoints
-
-* `GET /api/model/metrics`
-* `GET /api/model/confusion-matrix`
-* `GET /api/model/classification-report`
-
----
-
-## 🔹 Prediction Endpoints
-
-* `POST /api/predict`
-* `POST /api/predict/bulk`
-
----
-
-## 🔹 Results Endpoints
-
-* `GET /api/results`
-* `GET /api/results/download`
-
----
-
-# 🏗️ Part 4: System Architecture
-
-You must implement:
-
-Frontend (Bootstrap + JS)
-⬇
-Fetch API Calls
-⬇
-Flask Backend API
-⬇
-ML Model (TF-IDF + Logistic Regression)
-
----
-
-# 📊 Part 5: Deliverables
-
-Each student/group must submit:
-
-1. Source Code (Frontend + Backend)
-2. Screenshots of Dashboard
-3. API Endpoint List
-4. System Architecture Diagram
-5. 2-page Project Report (PDF)
-6. Demo Video (5–8 minutes)
-
----
-
-# 🧪 Bonus Features (Optional for Extra Marks)
-
-* ROC Curve Visualization
-* Model Comparison (Add Naive Bayes)
-* Word Cloud (Positive vs Negative)
-* Dark Mode Implementation
-* Authentication System
-* Deploy on Render / Railway / Heroku
-
----
-
-# 📝 Evaluation Criteria
-
-| Criteria           | Marks   |
-| ------------------ | ------- |
-| UI Design & Layout | 15      |
-| API Design         | 15      |
-| Integration        | 15      |
-| Visualization      | 15      |
-| Code Quality       | 10      |
-| Documentation      | 10      |
-| Viva               | 20      |
-| **Total**          | **100** |
-
----
-
-# 📅 Submission Deadline
-
-(To be announced by instructor)
-
----
-
-# 🚀 Expected Learning Outcomes
-
-After completing this project, students will understand:
-
-* NLP preprocessing workflow
-* TF-IDF feature extraction
-* Logistic Regression classification
-* REST API design
-* Dashboard UI design
-* Model evaluation metrics
-* ML system integration
-
----
-
-# ✅ Final Instruction
-
-This project must demonstrate:
-
-* Clear separation of frontend and backend
-* Proper RESTful API design
-* Interactive and responsive dashboard
-* Accurate ML integration
-
----
-
-**End of Assignment**
